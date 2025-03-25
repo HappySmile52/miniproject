@@ -1,0 +1,8 @@
+create table md_choice(
+midx int unsigned auto_increment comment '자동증가값',
+md_title varchar(100) not null comment '타이틀',
+md_details varchar(200) not null comment '상세내용',
+md_imgs varchar(50) not null comment '이미지',
+md_add varchar(200) not null comment '링크주소',
+primary key(midx)
+);
