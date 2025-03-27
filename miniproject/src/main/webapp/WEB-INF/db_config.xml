@@ -39,6 +39,7 @@
 		<property name="mapperLocations">
 			<array>
 				<value>classpath:/META-INF/mdchoice_mapper.xml</value>
+				<value>classpath:/META-INF/webinfo_mapper.xml</value>
 			</array>
 		</property>
 	</bean>
