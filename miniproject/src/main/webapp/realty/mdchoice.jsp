@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
 	<div class="recommend">
 		<p>추천분양정보<br><em>실시간 추천 분양정보를 한곳에!</em></p>
 		<div class="md_estates">
 			<ul>
-				<li>
-					<div><img src="./md_room/md_1.jpg"></div>
-					<span>도심 속 에코 라이프 입지<br>‘군산 레이크시티 아이파크’</span>
-					<div>레이크 라이프 누릴 수 있는 프리미엄 조경에<br>입주민 라이프스타일 맞춤형 평면 설계까지</div>
-				</li>
+				<cr:forEach var="mdata" items="${mdList}" varStatus="idx">
+					<a href=${mdata.md_add} target="_blank">
+						<li>
+							<div><img src=${mdata.md_imgs}></div>
+							<span>${mdata.md_title}</span>
+							<div>${mdata.md_details}</div>
+						</li>
+					</a>
+				</cr:forEach>
 			</ul>
 		</div>
 	</div>

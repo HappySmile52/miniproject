@@ -1,0 +1,10 @@
+create table web_info(
+web_company varchar(50) not null comment '회사명',
+web_ceo varchar(30) not null comment '대표',
+web_add varchar(100) not null comment '주소',
+web_num char(12) not null comment '사업자번호',
+web_sales varchar(100) not null comment '통신판매업',
+web_inc varchar(30) not null comment '정보보호책임자',
+web_tel char(11) not null comment '영업문의',
+web_fax char(11) not null comment '팩스번호'
+);
