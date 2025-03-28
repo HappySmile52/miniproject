@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL 문법에 대한 파일 (mapper) -->
+<mapper namespace="miniproject.type_info_mapper">
+
+<!-- type_info 리스트 데이터 -->
+<select id="typeinfo_select" resultType="typeinfodto" parameterType="String">
+select * from type_info
+</select>
+
+</mapper>

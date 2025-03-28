@@ -22,6 +22,12 @@ public class main_controller {
 	@Resource(name="web_info_DAO")
 	public web_info_DAO web_dao;
 	
+	@Resource(name="type_info_DTO")
+	public type_info_DTO type_dto;
+	
+	@Resource(name="type_info_DAO")
+	public type_info_DAO type_dao;
+	
 	@GetMapping("/realty/index.do")
 	public String index(Model m) {
 		List<md_choice_DTO> mdList = this.md_dao.mdchoice_select();
@@ -29,6 +35,9 @@ public class main_controller {
 		
 		web_info_DTO copyright = this.web_dao.web_info_select();
 		m.addAttribute("copyright", copyright);
+		
+		List<type_info_DTO> typeList = this.type_dao.type_info_select();
+		m.addAttribute("typeList", typeList);
 		
 		return null;
 	}
