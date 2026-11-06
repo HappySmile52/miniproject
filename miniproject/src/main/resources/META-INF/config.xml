@@ -15,5 +15,6 @@
 	<typeAlias alias="mdchoicedto" type="miniproject.md_choice_DTO"/>
 	<typeAlias alias="webinfodto" type="miniproject.web_info_DTO"/>
 	<typeAlias alias="typeinfodto" type="miniproject.type_info_DTO"/>
+	<typeAlias alias="membershipdto" type="miniproject.membership_DTO"/>
 </typeAliases>
 </configuration>

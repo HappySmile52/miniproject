@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL 문법에 대한 파일 (mapper) -->
+<mapper namespace="miniproject.membership_mapper">
+
+<!-- membership 이메일 중복체크 -->
+<select id="email_check" resultType="String">
+select count(*) as ctl from membership where memail=#{memail}
+</select>
+
+<!-- membership 회원가입 -->
+<insert id="insert_mem">
+insert into membership (midx,memail,mpass,mname,mtel,mag1,mag2,mag3,mag4,mdate) 
+values ('0',#{memail},#{mpass},#{mname},#{mtel},#{mag1},#{mag2},#{mag3},#{mag4},now())
+</insert>
+
+</mapper>

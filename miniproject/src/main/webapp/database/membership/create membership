@@ -1,0 +1,15 @@
+create table membership(
+midx int unsigned auto_increment comment '자동증가값',
+memail varchar(80) not null comment '이메일',
+mpass varchar(50) not null comment '패스워드',
+mname varchar(30) not null comment '담당자 이름',
+mtel varchar(11) not null comment '전화번호',
+mag1 enum('Y','N') not null default 'Y' comment '만 14세 약관 동의',
+mag2 enum('Y','N') not null default 'Y' comment '이용 약관 동의',
+mag3 enum('Y','N') not null default 'Y' comment '개인정보 수집 동의',
+mag4 enum('Y','N') not null default 'N' comment '마케팅 수신 동의',
+mdate timestamp not null default current_timestamp comment '등록일자',
+primary key(midx),
+unique (memail),
+unique (mtel)
+);
