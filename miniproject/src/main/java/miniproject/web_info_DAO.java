@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+// copyright DAO
+
 @Repository("web_info_DAO")
 public class web_info_DAO implements web_info_mapper {
 	@Resource(name="template")

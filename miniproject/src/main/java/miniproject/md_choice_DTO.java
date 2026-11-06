@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import lombok.Getter;
 import lombok.Setter;
 
+// 추천 분양 정보 DTO
+
 @Getter
 @Setter
 

@@ -4,7 +4,7 @@
 <!-- SQL 문법에 대한 파일 (mapper) -->
 <mapper namespace="miniproject.md_choice_mapper">
 
-<!-- mdchoice 리스트 데이터 -->
+<!-- mdchoice (추천 분양 정보) 리스트 데이터 -->
 <select id="mdchoice_select" resultType="mdchoicedto">
 select * from md_choice
 </select>

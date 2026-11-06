@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+// 추천 분양 정보 DAO
+
 @Repository("md_choice_DAO")
 public class md_choice_DAO implements md_choice_mapper {
 	@Resource(name="template")

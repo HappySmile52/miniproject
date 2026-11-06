@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import lombok.Getter;
 import lombok.Setter;
 
+// copyright DTO
+
 @Getter
 @Setter
 

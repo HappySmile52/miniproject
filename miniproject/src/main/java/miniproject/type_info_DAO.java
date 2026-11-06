@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+// 금주 분양 정보 DAO
+
 @Repository("type_info_DAO")
 public class type_info_DAO implements type_info_mapper {
 	@Resource(name="template")
