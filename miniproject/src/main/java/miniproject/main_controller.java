@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -116,4 +117,38 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 로그인
+	@PostMapping("/realty/loginok.do")
+	public String loginok(@RequestParam(name = "lemail") String lemail,
+							@RequestParam(name = "lpass") String lpass,
+							HttpSession session, ServletResponse res) {
+		res.setContentType("text/html; charset=utf-8");
+		
+		membership_DTO dto = new membership_DTO();
+		dto.setMemail(lemail);
+		dto.setMpass(lpass);
+		
+		try {
+			this.pw = res.getWriter();
+			membership_DTO member = this.mem_dao.login_mem(dto);
+			
+			if(member != null) {	// 로그인 성공
+				session.setAttribute("memail", member.getMemail());
+				session.setAttribute("mname", member.getMname());
+				session.setAttribute("mtel", member.getMtel());
+				
+				this.pw.write("<script>alert('" + member.getMname() + "님 환영합니다.'); location.href='./index.do';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('이메일 또는 비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
 }

@@ -11,4 +11,6 @@ public interface membership_mapper {
 	public String email_check(String memail);	// 이메일 중복체크
 	
 	public int insert_mem(membership_DTO dto);	// 회원가입
+	
+	public membership_DTO login_mem(membership_DTO dto);	// 로그인
 }

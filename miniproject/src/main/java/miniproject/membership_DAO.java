@@ -41,4 +41,18 @@ public class membership_DAO implements membership_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public membership_DTO login_mem(membership_DTO dto) {	// 로그인
+		membership_DTO result = null;
+		
+		try {
+			result = this.st.selectOne("login_mem", dto);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }
