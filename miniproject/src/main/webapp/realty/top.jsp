@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--최상단-->
 <header>
 	<div class="top_banner"></div>
@@ -18,11 +19,15 @@
 			<li>의뢰현황</li>
 			<li class="logins" onmouseleave="myinfo_menu(2)">
 				<span title="회원정보" onclick="myinfo_menu(1)">
-				<img src="./ico/login.svg">
-				<ul class="login_info" id="login_info" style="display: none;">
-					<li>로그인 / 회원가입</li>
-					<li>홍길동님 <a href="">[로그아웃]</a></li>
-				</ul>
+					<img src="./ico/login.svg">
+					<ul class="login_info" id="login_info" style="display: none;">
+						<cr:when test="${empty sessionScope.memail}">
+							<li><a href="./login.do">로그인</a> / <a href="./member_join.do">회원가입</a></li>
+						</cr:when>
+						<cr:otherwise>
+							<li>${sessionScope.mname}님 <a href="./logout.do">[로그아웃]</a></li>
+						</cr:otherwise>
+					</ul>
 				</span>
 				<span title="모델 하우스 사전예약 리스트" onclick="reserve_page()"><img src="./ico/reserve_list.svg"></span>
 			</li>

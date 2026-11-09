@@ -151,4 +151,20 @@ public class main_controller {
 		return null;
 	}
 	
+	// 로그아웃
+	@GetMapping("/realty/logout.do")
+	public String logout(HttpSession session, ServletResponse res) {
+		res.setContentType("text/html; charset=utf-8");
+		session.invalidate();	// 세션 전체 삭제
+		
+		try {
+			this.pw = res.getWriter();
+			this.pw.write("<script>alert('로그아웃 되었습니다.'); location.href='./index.do';</script>");
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 }
