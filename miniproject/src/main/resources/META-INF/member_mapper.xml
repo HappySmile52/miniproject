@@ -20,4 +20,9 @@ insert into membership (midx,memail,mpass,mname,mtel,mag1,mag2,mag3,mag4,mdate)
 values ('0',#{memail},#{mpass},#{mname},#{mtel},#{mag1},#{mag2},#{mag3},#{mag4},now())
 </insert>
 
+<!-- membership 이메일 찾기 -->
+<select id="email_search" resultType="String" parameterType="membershipdto">
+select memail from membership where mname=#{mname} and mtel=#{mtel}
+</select>
+
 </mapper>

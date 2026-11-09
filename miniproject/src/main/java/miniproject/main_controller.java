@@ -167,4 +167,20 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 이메일 찾기 화면
+	@GetMapping("/realty/email_search.do")
+	public String email_search() {
+		
+		return null;
+	}
+	
+	// 이메일 찾기 결과
+	@PostMapping("/realty/search_myinfo.do")
+	public String search_myinfo(membership_DTO dto, Model m) {
+		String memail = this.mem_dao.email_search(dto);
+		m.addAttribute("memail", memail);
+		
+		return null;
+	}
 }

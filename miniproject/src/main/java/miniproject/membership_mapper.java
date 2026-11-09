@@ -13,4 +13,6 @@ public interface membership_mapper {
 	public int insert_mem(membership_DTO dto);	// 회원가입
 	
 	public membership_DTO login_mem(membership_DTO dto);	// 로그인
+	
+	public String email_search(membership_DTO dto);	// 이메일 찾기
 }

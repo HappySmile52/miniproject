@@ -55,4 +55,18 @@ public class membership_DAO implements membership_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public String email_search(membership_DTO dto) {	// 이메일 찾기
+		String result = null;
+		
+		try {
+			result = this.st.selectOne("email_search", dto);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }
