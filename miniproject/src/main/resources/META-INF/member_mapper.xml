@@ -25,4 +25,9 @@ values ('0',#{memail},#{mpass},#{mname},#{mtel},#{mag1},#{mag2},#{mag3},#{mag4},
 select memail from membership where mname=#{mname} and mtel=#{mtel}
 </select>
 
+<!-- membership 비밀번호 찾기 (회원 확인) -->
+<select id="passwd_search" resultType="String" parameterType="membershipdto">
+select memail from membership where memail=#{memail} and mtel=#{mtel}
+</select>
+
 </mapper>

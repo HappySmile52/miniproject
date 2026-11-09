@@ -15,4 +15,6 @@ public interface membership_mapper {
 	public membership_DTO login_mem(membership_DTO dto);	// 로그인
 	
 	public String email_search(membership_DTO dto);	// 이메일 찾기
+	
+	public String passwd_search(membership_DTO dto);	// 비밀번호 찾기 (회원 확인)
 }

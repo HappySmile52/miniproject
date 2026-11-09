@@ -69,4 +69,18 @@ public class membership_DAO implements membership_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public String passwd_search(membership_DTO dto) {	// 비밀번호 찾기 (회원 확인)
+		String result = null;
+		
+		try {
+			result = this.st.selectOne("passwd_search", dto);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

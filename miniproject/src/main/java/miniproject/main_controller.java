@@ -183,4 +183,35 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 비밀번호 찾기 화면
+	@GetMapping("/realty/passwd_search.do")
+	public String passwd_search() {
+		
+		return null;
+	}
+	
+	// 비밀번호 찾기 (회원 확인)
+	@PostMapping("/realty/search_mypass.do")
+	public String search_mypass(membership_DTO dto, HttpSession session, ServletResponse res) {
+		res.setContentType("text/html; charset=utf-8");
+		
+		String memail = this.mem_dao.passwd_search(dto);
+		
+		if(memail == null) {
+			try {
+				this.pw = res.getWriter();
+				this.pw.write("<script>alert('가입하신 정보는 확인 되지 않습니다.'); history.go(-1);</script>");
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+			
+			return null;
+		}
+		
+		// 확인된 이메일 세션 저장(비밀번호 변경 시 사용)
+		session.setAttribute("pw_email", memail);
+		return "realty/search_mypass";
+	}
 }
