@@ -34,9 +34,9 @@
 		<div><input type="button" value="로그인" onclick="logincheck()"></div>
 		<div><input type="button" value="카카오로그인" class="kakao_btn"></div>
 		<div>
-			<span onclick="location.href='./index.do';"><label>회원가입</label></span>
-			<span><label>이메일 찾기</label></span>
-			<span><label>비밀번호 찾기</label></span>
+			<span><label onclick="location.href='./member_join.do'">회원가입</label></span>
+			<span><label onclick="location.href='./email_search.do'">이메일 찾기</label></span>
+			<span><label onclick="location.href='./passwd_search.do'">비밀번호 찾기</label></span>
 		</div>
 	</aside>
 </form>
