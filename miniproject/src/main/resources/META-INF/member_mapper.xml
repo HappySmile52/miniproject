@@ -30,4 +30,9 @@ select memail from membership where mname=#{mname} and mtel=#{mtel}
 select memail from membership where memail=#{memail} and mtel=#{mtel}
 </select>
 
+<!-- membership 비밀번호 변경 -->
+<update id="passwd_update" parameterType="membershipdto">
+update membership set mpass=#{mpass} where memail=#{memail}
+</update>
+
 </mapper>

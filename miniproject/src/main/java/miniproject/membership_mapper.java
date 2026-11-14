@@ -17,4 +17,6 @@ public interface membership_mapper {
 	public String email_search(membership_DTO dto);	// 이메일 찾기
 	
 	public String passwd_search(membership_DTO dto);	// 비밀번호 찾기 (회원 확인)
+	
+	public int passwd_update(membership_DTO dto);	// 비밀번호 변경
 }

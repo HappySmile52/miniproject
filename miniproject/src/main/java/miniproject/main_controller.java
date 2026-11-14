@@ -214,4 +214,42 @@ public class main_controller {
 		session.setAttribute("pw_email", memail);
 		return "realty/search_mypass";
 	}
+	
+	// 비밀번호 변경
+	@PostMapping("/realty/mypass_change.do")
+	public String mypass_change(@RequestParam(name = "mpass") String mpass, HttpSession session, ServletResponse res) {
+		res.setContentType("text/html; charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			String memail = (String)session.getAttribute("pw_email");
+			
+			if(memail == null) {	// 회원 확인 없이 접근한 경우
+				this.pw.write("<script>alert('잘못된 접근입니다.'); location.href='./passwd_search.do';</script>");
+				
+				return null;	
+			}
+			
+			membership_DTO dto = new membership_DTO();
+			dto.setMemail(memail);
+			dto.setMpass(mpass);
+			
+			int result = this.mem_dao.passwd_update(dto);
+			
+			if(result > 0) {
+				session.removeAttribute("pw_email");
+				
+				this.pw.write("<script>alert('비밀번호가 변경되었습니다.'); location.href='./login.do';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('비밀번호 변경에 실패했습니다.'); history.go(-1);</script>");
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 }

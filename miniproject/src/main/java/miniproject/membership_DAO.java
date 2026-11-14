@@ -83,4 +83,18 @@ public class membership_DAO implements membership_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public int passwd_update(membership_DTO dto) {	// 비밀번호 변경
+		int result = 0;
+		
+		try {
+			result = this.st.update("passwd_update", dto);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }
