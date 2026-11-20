@@ -1,0 +1,12 @@
+create table counsel(
+cidx int unsigned auto_increment comment '자동증가값',
+cname varchar(30) not null comment '상담자명',
+cemail varchar(80) not null comment '이메일',
+ctel varchar(11) not null comment '연락처',
+crent varchar(50) not null comment '임대형태',
+chouse varchar(50) not null comment '주거형태',
+cdate date not null comment '상담일시',
+ccontent text not null comment '상담내용',
+cregdate timestamp not null default current_timestamp comment '신청일자',
+primary key(cidx)
+);

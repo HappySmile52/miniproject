@@ -29,6 +29,9 @@ public class main_controller {
 	@Resource(name="membership_DAO")
 	public membership_DAO mem_dao;
 	
+	@Resource(name="counsel_DAO")
+	public counsel_DAO counsel_dao;
+	
 	PrintWriter pw = null;
 	
 	// 메인 화면
@@ -247,6 +250,61 @@ public class main_controller {
 			}
 		}
 		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+	// 상담신청 화면
+	@GetMapping("/realty/counsel.do")
+	public String counsel(HttpSession session, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		if(session.getAttribute("memail") == null) {	// 비로그인
+			try {
+				this.pw = res.getWriter();
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+			}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			return null;
+		}
+		
+		return "realty/counsel";
+	}
+	
+	// 상담신청 처리
+	@PostMapping("/realty/counselok.do")
+	public String counselok(counsel_DTO dto, HttpSession session, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 세션 만료 등
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			// 상담자 정보는 세션 값으로 저장
+			dto.setCname((String)session.getAttribute("mname"));
+			dto.setCemail((String)session.getAttribute("memail"));
+			dto.setCtel((String)session.getAttribute("mtel"));
+			
+			int result = this.counsel_dao.insert_counsel(dto);
+			
+			if(result > 0) {
+				this.pw.write("<script>alert('담당자가 확인 후 해당 상담일시에 맞춰서 연락 드립니다.'); location.href='./index.do';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('상담신청에 실패했습니다. 다시 시도해주세요.'); history.go(-1);</script>");
+			}
+		}
+		catch (Exception e) {
 			System.out.println(e);
 		}
 		

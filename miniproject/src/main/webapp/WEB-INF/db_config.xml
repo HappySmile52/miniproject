@@ -42,6 +42,7 @@
 				<value>classpath:/META-INF/webinfo_mapper.xml</value>
 				<value>classpath:/META-INF/typeinfo_mapper.xml</value>
 				<value>classpath:/META-INF/member_mapper.xml</value>
+				<value>classpath:/META-INF/counsel_mapper.xml</value>
 			</array>
 		</property>
 	</bean>
