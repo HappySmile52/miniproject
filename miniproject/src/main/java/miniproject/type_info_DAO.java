@@ -15,8 +15,22 @@ public class type_info_DAO implements type_info_mapper {
 	public SqlSessionTemplate st;
 	
 	@Override
-	public List<type_info_DTO> type_info_select() {
+	public List<type_info_DTO> type_info_select() {	// 매물 리스트
 		List<type_info_DTO> typeList = this.st.selectList("typeinfo_select");
 		return typeList;
+	}
+	
+	@Override
+	public type_info_DTO type_info_detail(int bidx) {	// 매물 상세
+		type_info_DTO result = null;
+		
+		try {
+			result = this.st.selectOne("typeinfo_detail", bidx);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
 	}
 }

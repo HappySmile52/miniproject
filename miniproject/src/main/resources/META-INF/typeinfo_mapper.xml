@@ -9,4 +9,9 @@
 select * from type_info
 </select>
 
+<!-- type_info (금주 분양 정보) 상세 데이터 -->
+<select id="typeinfo_detail" resultType="typeinfodto" parameterType="int">
+select * from type_info where bidx=#{bidx}
+</select>
+
 </mapper>

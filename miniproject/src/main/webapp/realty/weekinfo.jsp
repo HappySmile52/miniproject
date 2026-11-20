@@ -8,7 +8,7 @@
 			<ul>
 				<cr:forEach var="tdata" items="${typeList}" varStatus="idx">
 					<li>
-						<a>
+						<a onclick="week_go(${tdata.bidx})" style="cursor:pointer;">
 						  <span>${tdata.b_present}</span>
 						  <div>${tdata.b_title}</div>
 						  <aside>${tdata.b_add}</aside>
@@ -22,3 +22,17 @@
 		</div>
 	</div>
 </section>
+<script>
+// 금주분양 매물 클릭 → 로그인 시 상세페이지, 비로그인 시 로그인 화면
+var login_ck = "${sessionScope.memail}";
+
+function week_go(bidx){
+	if(login_ck == ""){
+		alert("로그인 후 이용 가능합니다.");
+		location.href = "./login.do";
+	}
+	else{
+		location.href = "./week_tails.do?bidx=" + bidx;
+	}
+}
+</script>

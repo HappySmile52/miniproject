@@ -310,4 +310,38 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 금주분양 매물 상세
+	@GetMapping("/realty/week_tails.do")
+	public String week_tails(@RequestParam(name = "bidx", defaultValue = "0") int bidx,
+			 HttpSession session, Model m, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			// 비로그인 (주소창 직접 접근 차단)
+			if(session.getAttribute("memail") == null) {
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			// 매물 조회
+			type_info_DTO tdata = this.type_dao.type_info_detail(bidx);
+			
+			if(tdata == null) {	// 없는 매물 번호
+				this.pw.write("<script>alert('존재하지 않는 매물입니다.'); location.href='./index.do';</script>");
+				
+				return null;
+			}
+			
+			m.addAttribute("tdata", tdata);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return "realty/week_tails";
+	}
 }
