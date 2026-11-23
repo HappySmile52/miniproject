@@ -17,5 +17,6 @@
 	<typeAlias alias="typeinfodto" type="miniproject.type_info_DTO"/>
 	<typeAlias alias="membershipdto" type="miniproject.membership_DTO"/>
 	<typeAlias alias="counseldto" type="miniproject.counsel_DTO"/>
+	<typeAlias alias="reservationdto" type="miniproject.reservation_DTO"/>
 </typeAliases>
 </configuration>

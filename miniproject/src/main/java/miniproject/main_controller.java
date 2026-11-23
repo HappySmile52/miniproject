@@ -32,6 +32,9 @@ public class main_controller {
 	@Resource(name="counsel_DAO")
 	public counsel_DAO counsel_dao;
 	
+	@Resource(name="reservation_DAO")
+	public reservation_DAO reserve_dao;
+	
 	PrintWriter pw = null;
 	
 	// 메인 화면
@@ -337,11 +340,102 @@ public class main_controller {
 			}
 			
 			m.addAttribute("tdata", tdata);
+			
+			// 예약 여부 확인 -> 방문 예약 / 방문 예약 완료 버튼 전환
+			reservation_DTO rdto = new reservation_DTO();
+			rdto.setRemail((String)session.getAttribute("memail"));
+			rdto.setBidx(bidx);
+			m.addAttribute("reserved", this.reserve_dao.reserve_count(rdto));
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
 		
 		return "realty/week_tails";
+	}
+	
+	// 방문 예약 화면
+	@GetMapping("/realty/reservation.do")
+	public String reservation(@RequestParam(name = "bidx", defaultValue = "0") int bidx,
+			  HttpSession session, Model m, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			type_info_DTO tdata = this.type_dao.type_info_detail(bidx);
+			
+			if(tdata == null) {	// 없는 매물
+				this.pw.write("<script>alert('존재하지 않는 매물입니다.'); location.href='./index.do';</script>");
+				
+				return null;
+			}
+			
+			// 이미 예약한 매물
+			reservation_DTO rdto = new reservation_DTO();
+			rdto.setRemail((String)session.getAttribute("memail"));
+			rdto.setBidx(bidx);
+			
+			if(this.reserve_dao.reserve_count(rdto) > 0) {
+				this.pw.write("<script>alert('이미 방문예약한 매물입니다.'); location.href='./week_tails.do?bidx=" + bidx + "';</script>");
+				
+				return null;
+			}
+			
+			m.addAttribute("tdata", tdata);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "realty/reservation";
+	}
+	
+	// 방문 예약 등록
+	@PostMapping("/realty/reservationok.do")
+	public String reservationok(reservation_DTO dto, HttpSession session, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			// 방문자 정보는 세션 값으로 저장
+			dto.setRemail((String)session.getAttribute("memail"));
+			dto.setRname((String)session.getAttribute("mname"));
+			dto.setRtel((String)session.getAttribute("mtel"));
+			
+			// 중복 예약 확인
+			if(this.reserve_dao.reserve_count(dto) > 0) {
+				this.pw.write("<script>alert('이미 방문예약한 매물입니다.'); location.href='./week_tails.do?bidx=" + dto.getBidx() + "';</script>");
+				
+				return null;
+			}
+			
+			int result = this.reserve_dao.insert_reserve(dto);
+			
+			if(result > 0) {
+				this.pw.write("<script>alert('방문예약이 등록되었습니다.'); location.href='./week_tails.do?bidx=" + dto.getBidx() + "';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('방문예약에 실패했습니다. 다시 시도해주세요.'); history.go(-1);</script>");
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
 	}
 }

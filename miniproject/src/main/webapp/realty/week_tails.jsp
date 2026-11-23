@@ -1,6 +1,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	Date today = new Date();
 %>
@@ -39,7 +40,14 @@
 				<li><img src="${tdata.b_img}"></li>
 			</ul>
 		</div>
-		<div><button class="btn_css" onclick="location.href='./reservation.do?bidx=${tdata.bidx}'">방문예약</button></div>
+		<cr:choose>
+			<cr:when test="${reserved > 0}">
+				<div><button class="btn_close" onclick="location.href='./reservation_check.do?bidx=${tdata.bidx}'">방문예약완료</button></div>
+			</cr:when>
+			<cr:otherwise>
+				<div><button class="btn_css" onclick="location.href='./reservation.do?bidx=${tdata.bidx}'">방문예약</button></div>
+			</cr:otherwise>
+		</cr:choose>
 	</div>
 	<!-- 매물 상세 -->
 </main>

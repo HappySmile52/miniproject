@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL 문법에 대한 파일 (mapper) -->
+<mapper namespace="miniproject.reservation_mapper">
+
+<!-- reservation 예약 여부 확인 -->
+<select id="reserve_count" resultType="int" parameterType="reservationdto">
+select count(*) from reservation where remail=#{remail} and bidx=#{bidx}
+</select>
+
+<!-- reservation 방문예약 등록 -->
+<insert id="insert_reserve" parameterType="reservationdto">
+insert into reservation (ridx,bidx,remail,rname,rtel,rdate,rtime,rcount,rregdate)
+values ('0',#{bidx},#{remail},#{rname},#{rtel},#{rdate},#{rtime},#{rcount},now())
+</insert>
+
+</mapper>
