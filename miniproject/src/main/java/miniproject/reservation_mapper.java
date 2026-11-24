@@ -9,4 +9,6 @@ public interface reservation_mapper {
 	public int reserve_count(reservation_DTO dto);	// 예약 여부 확인
 	
 	public int insert_reserve(reservation_DTO dto);	// 방문예약 등록
+	
+	public reservation_DTO reserve_detail(reservation_DTO dto);	// 예약 확인
 }

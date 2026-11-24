@@ -438,4 +438,44 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 방문 예약 확인
+	@GetMapping("/realty/reservation_check.do")
+	public String reservation_check(@RequestParam(name = "bidx", defaultValue = "0") int bidx,
+			HttpSession session, Model m, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			// 내 예약 조회
+			reservation_DTO rdto = new reservation_DTO();
+			rdto.setRemail((String)session.getAttribute("memail"));
+			rdto.setBidx(bidx);
+			reservation_DTO rdata = this.reserve_dao.reserve_detail(rdto);
+			
+			if(rdata == null) {	// 예약 내역 없음
+				this.pw.write("<script>alert('방문예약 내역이 없습니다.'); location.href='./index.do';</script>");
+				
+				return null;
+			}
+			
+			// 아파트명 출력용 매물 정보
+			type_info_DTO tdata = this.type_dao.type_info_detail(bidx);
+			
+			m.addAttribute("rdata", rdata);
+			m.addAttribute("tdata", tdata);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "realty/reservation_check";
+	}
 }

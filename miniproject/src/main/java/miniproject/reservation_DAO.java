@@ -39,4 +39,18 @@ public class reservation_DAO implements reservation_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public reservation_DTO reserve_detail(reservation_DTO dto) {	// 예약 확인
+		reservation_DTO result = null;
+		
+		try {
+			result = this.st.selectOne("reserve_detail", dto);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

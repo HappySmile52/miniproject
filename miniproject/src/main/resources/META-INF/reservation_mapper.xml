@@ -14,4 +14,9 @@ insert into reservation (ridx,bidx,remail,rname,rtel,rdate,rtime,rcount,rregdate
 values ('0',#{bidx},#{remail},#{rname},#{rtel},#{rdate},#{rtime},#{rcount},now())
 </insert>
 
+<!-- reservation 예약 확인 (상세) -->
+<select id="reserve_detail" resultType="reservationdto" parameterType="reservationdto">
+select * from reservation where remail=#{remail} and bidx=#{bidx}
+</select>
+
 </mapper>

@@ -23,25 +23,25 @@
 		<div>
 			<span class="list_title">
 				<span style="color: blue;">분양정보</span>
-				<span style="color: red;">LH센트럴힐(공공임대)</span>
+				<span style="color: red;">${tdata.b_title}</span>
 			</span>
 			<ul class="sub_ul">
 				<li>방문일시</li>    
-				<li><input type="text" class="sel_input" disabled></li> 
+				<li><input type="text" class="sel_input" value="${rdata.rdate}" disabled></li>
 				<li>방문시간</li>    
 				<li>
-					<input class="sel_input2" disabled>* 해당 시간에 맞춰서 방문해 주셔야 합니다.
+					<input class="sel_input2" value="${rdata.rtime}" disabled> * 해당 시간에 맞춰서 방문해 주셔야 합니다.
 				</li> 
 				<li>방문자명</li>    
-				<li><input type="text" class="sel_input" disabled></li> 
+				<li><input type="text" class="sel_input" value="${rdata.rname}" disabled></li>
 				<li>방문인원</li>    
-				<li>1명 ※ 방문인원은 최대 2명까지 입니다.</li>   
+				<li>${rdata.rcount}명 ※ 방문인원은 최대 2명까지 입니다.</li> 
 				<li>연락처</li>    
-				<li><input type="text" class="sel_input" disabled></li>       
+				<li><input type="text" class="sel_input" value="${rdata.rtel}" disabled></li>      
 			</ul>
 		</div>
 		<div>
-			<input type="button" value="메인페이지로 이동">
+			<input type="button" value="메인페이지로 이동" onclick="location.href='./index.do'">
 		</div>
 	</section>
 	<!-- 방문 예약 확인 -->
