@@ -27,4 +27,9 @@ where r.remail=#{remail}
 order by r.ridx desc
 </select>
 
+<!-- reservation 방문예약 취소 -->
+<delete id="reserve_delete" parameterType="reservationdto">
+delete from reservation where ridx=#{ridx} and remail=#{remail}
+</delete>
+
 </mapper>

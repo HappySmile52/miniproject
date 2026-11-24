@@ -69,4 +69,18 @@ public class reservation_DAO implements reservation_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public int reserve_delete(reservation_DTO dto) {	// 방문예약 취소
+		int result = 0;
+		
+		try {
+			result = this.st.delete("reserve_delete", dto);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

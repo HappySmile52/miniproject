@@ -502,4 +502,38 @@ public class main_controller {
 		
 		return "realty/reservation_list";
 	}
+	
+	// 방문예약 취소
+	@PostMapping("/realty/reservation_cancel.do")
+	public String reservation_cancel(@RequestParam(name = "ridx", defaultValue = "0") int ridx,
+			 HttpSession session, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			reservation_DTO dto = new reservation_DTO();
+			dto.setRidx(ridx);
+			dto.setRemail((String)session.getAttribute("memail"));
+			int result = this.reserve_dao.reserve_delete(dto);
+			
+			if(result > 0) {
+				this.pw.write("<script>alert('방문예약이 취소되었습니다.'); location.href='./reservation_list.do';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('방문예약 취소에 실패했습니다.'); location.href='./reservation_list.do';</script>");
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 }

@@ -59,9 +59,16 @@
 		</div>
 	</section>
     <!-- 방문예약 리스트 -->
+    
+    <!-- 취소 전송용 form -->
+    <form id="cancel_frm" method="post" action="./reservation_cancel.do">
+    	<input type="hidden" name="ridx">
+    </form>
+    <!-- 취소 전송용 form -->
 </main>
 <!-- 카피라이터 -->
 <%@ include file="./copyright.jsp" %>
 <!-- 카피라이터 -->
 </body>
+<script src="./js/reservation_list.js?v=<%=today%>"></script>
 </html>
