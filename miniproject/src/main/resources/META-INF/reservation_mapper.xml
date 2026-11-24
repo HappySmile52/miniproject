@@ -19,4 +19,12 @@ values ('0',#{bidx},#{remail},#{rname},#{rtel},#{rdate},#{rtime},#{rcount},now()
 select * from reservation where remail=#{remail} and bidx=#{bidx}
 </select>
 
+<!-- reservation 내 예약 리스트 (type_info JOIN) -->
+<select id="reserve_list" resultType="reservationdto" parameterType="String">
+select r.*, t.b_title
+from reservation r join type_info t on r.bidx = t.bidx
+where r.remail=#{remail}
+order by r.ridx desc
+</select>
+
 </mapper>

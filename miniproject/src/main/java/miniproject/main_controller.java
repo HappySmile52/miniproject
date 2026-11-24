@@ -478,4 +478,28 @@ public class main_controller {
 		
 		return "realty/reservation_check";
 	}
+	
+	// 방문예약 리스트
+	@GetMapping("/realty/reservation_list.do")
+	public String reservation_list(HttpSession session, Model m, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			List<reservation_DTO> rlist = this.reserve_dao.reserve_list((String)session.getAttribute("memail"));
+			m.addAttribute("rlist", rlist);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "realty/reservation_list";
+	}
 }

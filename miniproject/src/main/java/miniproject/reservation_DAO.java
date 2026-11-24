@@ -1,5 +1,7 @@
 package miniproject;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,6 +48,20 @@ public class reservation_DAO implements reservation_mapper {
 		
 		try {
 			result = this.st.selectOne("reserve_detail", dto);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<reservation_DTO> reserve_list(String remail) {	// 내 예약 리스트
+		List<reservation_DTO> result = null;
+		
+		try {
+			result = this.st.selectList("reserve_list", remail);
 		}
 		catch (Exception e) {
 			System.out.println(e);

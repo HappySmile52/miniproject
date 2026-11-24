@@ -12,4 +12,6 @@ import lombok.Data;
 public class reservation_DTO {
 	int ridx, bidx, rcount;
 	String remail, rname, rtel, rdate, rtime, rregdate;
+	
+	String b_title;
 }

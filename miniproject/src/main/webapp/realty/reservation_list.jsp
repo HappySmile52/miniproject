@@ -1,6 +1,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	Date today = new Date();
 %>
@@ -38,15 +39,23 @@
 				<li>인원수</li>
 				<li>취소</li>
 			</ul>
-			<ul style="display: block;"><li class="nodata">등록된 방문 예약이 없습니다.</li></ul>
-			<ul class="data_view">
-				<li>1</li>
-				<li style="text-align: left;">LH센터럴힐(공공임대)</li>
-				<li>2025-04-02</li>
-				<li>11:00</li>
-				<li>2명</li>
-				<li><input type="button" value="취소" class="cancel_btn"></li>
-			</ul>
+			<cr:choose>
+				<cr:when test="${empty rlist}">
+					<ul style="display: block;"><li class="nodata">등록된 방문 예약이 없습니다.</li></ul>
+				</cr:when>
+				<cr:otherwise>
+					<cr:forEach var="rdata" items="${rlist}" varStatus="idx">
+						<ul class="data_view">
+							<li>${idx.count}</li>
+							<li style="text-align: left;">${rdata.b_title}</li>
+							<li>${rdata.rdate}</li>
+							<li>${rdata.rtime}</li>
+							<li>${rdata.rcount}명</li>
+							<li><input type="button" value="취소" class="cancel_btn" onclick="reserve_cancel(${rdata.ridx})"></li>
+						</ul>
+					</cr:forEach>
+				</cr:otherwise>
+			</cr:choose>
 		</div>
 	</section>
     <!-- 방문예약 리스트 -->
