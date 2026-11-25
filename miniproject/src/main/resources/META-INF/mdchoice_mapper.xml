@@ -4,9 +4,9 @@
 <!-- SQL 문법에 대한 파일 (mapper) -->
 <mapper namespace="miniproject.md_choice_mapper">
 
-<!-- mdchoice (추천 분양 정보) 리스트 데이터 -->
+<!-- mdchoice (추천 분양 정보) 리스트 데이터 : 최신 4개 -->
 <select id="mdchoice_select" resultType="mdchoicedto">
-select * from md_choice
+select * from md_choice order by midx desc limit 4
 </select>
 
 </mapper>
