@@ -8,8 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>추천분양 정보 게시판</title>
+	<meta charset="UTF-8">
+	<title>추천분양 정보 게시판</title>
 	<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
 	<link rel="stylesheet" type="text/css" href="./css/reservation_list.css?v=5">
 <style>

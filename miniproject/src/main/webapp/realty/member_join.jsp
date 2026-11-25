@@ -7,17 +7,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="./css/index.css?v=<%=today%>">
 	<link rel="stylesheet" type="text/css" href="./css/member_join.css?v=<%=today%>">
-<style>
-.box {
-	width: 800px;
-	height: 300px;
-	border: 1px solid black;
-	overflow: auto;
-}
-</style>
+	<style>
+	.box {
+		width: 800px;
+		height: 300px;
+		border: 1px solid black;
+		overflow: auto;
+	}
+	</style>
 <title>회원가입</title>
 </head>
 <body>

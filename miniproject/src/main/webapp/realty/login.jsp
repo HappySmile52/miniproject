@@ -7,18 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>로그인</title>
+	<meta charset="UTF-8">
+	<title>로그인</title>
 	<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
 	<link rel="stylesheet" type="text/css" href="./css/login.css?v=2">
-<style>
-.box {
-	width: 800px;
-	height: 300px;
-	border: 1px solid black;
-	overflow: auto;
-}
-</style>
+	<style>
+	.box {
+		width: 800px;
+		height: 300px;
+		border: 1px solid black;
+		overflow: auto;
+	}
+	</style>
 </head>
 <body>
 <!-- 상단 -->
