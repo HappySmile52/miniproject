@@ -25,6 +25,7 @@
 <%@ include file="./top.jsp" %>
 <!-- 상단 -->
 <main>
+	<!-- 게시판 리스트 -->
 	<section class="sub">
 		<p>추천분양 정보 게시판</p>
 		<div class="boards">이번주 신규 매물정보를 한눈에 확인하실 수 있습니다.</div>
@@ -57,6 +58,7 @@
 			<input type="button" value="검색" class="search_btn">
 		</div>
 	</section>
+	<!-- 게시판 리스트 -->
 </main>
 <!-- 카피라이터 -->
 <%@ include file="./copyright.jsp" %>
