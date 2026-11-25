@@ -1,8 +1,23 @@
+-- 수정 전
 create table md_choice(
 midx int unsigned auto_increment comment '자동증가값',
 md_title varchar(100) not null comment '타이틀',
 md_details varchar(200) not null comment '상세내용',
 md_imgs varchar(50) not null comment '이미지',
 md_add varchar(200) not null comment '링크주소',
+primary key(midx)
+);
+
+-- 수정 후
+create table md_choice(
+midx int unsigned auto_increment comment '자동증가값',
+md_title varchar(100) not null comment '타이틀',
+md_details varchar(200) null comment '상세내용',
+md_imgs varchar(50) not null comment '이미지',
+md_add varchar(200) null comment '링크주소',
+md_writer varchar(30) not null default '관리자' comment '글쓴이',
+md_content text null comment '내용',
+md_view int unsigned not null default 0 comment '조회수',
+md_date timestamp not null default current_timestamp comment '등록일',
 primary key(midx)
 );

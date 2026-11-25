@@ -14,4 +14,6 @@ import lombok.Setter;
 public class md_choice_DTO {
 	int midx;
 	String md_title, md_details, md_imgs, md_add;
+	
+	String md_writer, md_content, md_date;
 }
