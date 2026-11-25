@@ -15,8 +15,22 @@ public class md_choice_DAO implements md_choice_mapper {
 	public SqlSessionTemplate st;
 	
 	@Override
-	public List<md_choice_DTO> mdchoice_select() {
+	public List<md_choice_DTO> mdchoice_select() {	// 리스트 출력
 		List<md_choice_DTO> mdList = this.st.selectList("mdchoice_select");
 		return mdList;
+	}
+	
+	@Override
+	public int mdchoice_insert(md_choice_DTO dto) {	// 게시판 글쓰기
+		int result = 0;
+		
+		try {
+			result = this.st.insert("mdchoice_insert", dto);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
 	}
 }

@@ -9,4 +9,10 @@
 select * from md_choice order by midx desc limit 4
 </select>
 
+<!-- mdchoice 게시판 글쓰기 -->
+<insert id="mdchoice_insert" parameterType="mdchoicedto">
+insert into md_choice (midx,md_title,md_details,md_imgs,md_writer,md_content,md_date)
+values ('0',#{md_title},#{md_details},#{md_imgs},#{md_writer},#{md_content},now())
+</insert>
+
 </mapper>

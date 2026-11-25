@@ -27,29 +27,29 @@
 <!-- 상단 -->
 <main>
 	<!-- 게시판 글쓰기 -->
-	<section class="sub">
-		<p>추천분양 정보 게시판</p>
-		<div class="boards">이번주 신규 매물정보를 한눈에 확인하실 수 있습니다.</div>
-		<div class="info_board">
-			<ul>
-				<li>제&nbsp;&nbsp;&nbsp;목</li>
-				<li><input type="text" class="board_in2"></li>
-				<li>글쓴이</li>
-				<li><input type="text" class="board_in1"></li>
-				<li>썸네일 이미지</li>
-				<li><input type="file"></li>
-				<li class="litext">내&nbsp;&nbsp;&nbsp;용</li>
-				<li class="litext">
-					<textarea id="board_text">
-					
-					</textarea>
-				</li>
-			</ul>
-		</div>
-		<div class="board_btn">
-			<input type="button" value="등&nbsp;&nbsp;&nbsp;록" class="btns">
-		</div>
-	</section>
+	<form id="frm" method="post" action="./md_board_writeok.do" enctype="multipart/form-data">
+		<section class="sub">
+			<p>추천분양 정보 게시판</p>
+			<div class="boards">이번주 신규 매물정보를 한눈에 확인하실 수 있습니다.</div>
+			<div class="info_board">
+				<ul>
+					<li>제&nbsp;&nbsp;&nbsp;목</li>
+					<li><input type="text" name="md_title" class="board_in2" maxlength="100"></li>
+					<li>글쓴이</li>
+					<li><input type="text" class="board_in1" value="관리자" readonly></li>
+					<li>썸네일 이미지</li>
+					<li><input type="file" name="mfile" accept="image/*"></li>
+					<li class="litext">내&nbsp;&nbsp;&nbsp;용</li>
+					<li class="litext">
+						<textarea name="md_content" id="board_text"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div class="board_btn">
+				<input type="button" value="등&nbsp;&nbsp;&nbsp;록" class="btns" onclick="md_write()">
+			</div>
+		</section>
+	</form>
 	<!-- 게시판 글쓰기 -->
 </main>
 <!-- 카피라이터 -->

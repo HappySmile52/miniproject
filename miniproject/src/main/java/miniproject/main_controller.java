@@ -1,10 +1,12 @@
 package miniproject;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class main_controller {	
@@ -528,6 +531,90 @@ public class main_controller {
 			}
 			else {
 				this.pw.write("<script>alert('방문예약 취소에 실패했습니다.'); location.href='./reservation_list.do';</script>");
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+	// 추천분양 게시판 글쓰기 화면
+	@GetMapping("/realty/md_board_write.do")
+	public String md_board_write(HttpSession session, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		if(session.getAttribute("memail") == null) {	// 비로그인
+			try {
+				this.pw = res.getWriter();
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+			}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			return null;
+		}
+		
+		return "realty/md_board_write";
+	}
+	
+	// 추천분양 게시판 글쓰기 처리
+	@PostMapping("/realty/md_board_writeok.do")
+	public String md_board_writeok(md_choice_DTO dto,
+			@RequestParam(name = "mfile") MultipartFile mfile,
+			HttpSession session, HttpServletRequest req, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		try {
+			this.pw = res.getWriter();
+			
+			if(session.getAttribute("memail") == null) {	// 비로그인
+				this.pw.write("<script>alert('로그인 후 이용 가능합니다.'); location.href='./login.do';</script>");
+				
+				return null;
+			}
+			
+			// 썸네일 검사 (필수 / 이미지 / 2MB 이하)
+			if(mfile.isEmpty()) {
+				this.pw.write("<script>alert('썸네일 이미지를 첨부해주세요.'); history.go(-1);</script>");
+				
+				return null;
+			}
+			if(mfile.getContentType() == null || !mfile.getContentType().startsWith("image/")) {
+				this.pw.write("<script>alert('이미지 파일만 첨부 가능합니다.'); history.go(-1);</script>");
+				
+				return null;
+			}
+			if(mfile.getSize() > 2 * 1024 * 1024) {
+				this.pw.write("<script>alert('이미지 크기는 2MB 이하만 가능합니다.'); history.go(-1);</script>");
+				
+				return null;
+			}
+			
+			// 썸네일 저장 : realty/md_room/시간값.확장자
+			String ori_name = mfile.getOriginalFilename();
+			String ext = ori_name.substring(ori_name.lastIndexOf("."));
+			String new_name = System.currentTimeMillis() + ext;
+			String path = req.getServletContext().getRealPath("/realty/md_room/");
+			mfile.transferTo(new File(path, new_name));
+			dto.setMd_imgs("./md_room/" + new_name);
+			
+			// 글쓴이 고정
+			dto.setMd_writer("관리자");
+			
+			// 메인 카드용 요약 : 본문에서 태그 제거 후 40자
+			String text = dto.getMd_content().replaceAll("<[^>]*>", "").replaceAll("&nbsp;", " ").trim();
+			dto.setMd_details(text.length() > 40 ? text.substring(0, 40) + "..." : text);
+			
+			int result = this.md_dao.mdchoice_insert(dto);
+			
+			if(result > 0) {
+				this.pw.write("<script>alert('추천분양 정보 게시판 게시물이 추가 되었습니다.'); location.href='./md_board.do';</script>");
+			}
+			else {
+				this.pw.write("<script>alert('게시물 등록에 실패했습니다.'); history.go(-1);</script>");
 			}
 		}
 		catch (Exception e) {
