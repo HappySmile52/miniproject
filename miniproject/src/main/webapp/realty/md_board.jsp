@@ -1,6 +1,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	Date today = new Date();
 %>
@@ -37,26 +38,47 @@
 				<li>조회수</li>
 				<li>등록일</li>
 			</ul>
-			<ul style="display: none;"><li class="nodata">등록된 게시물이 없습니다.</li></ul>
-			<ul class="data_view">
-				<li>1</li>
-				<li style="text-align: left;">게시물 제목출력</li>
-				<li>관리자</li>
-				<li>30</li>
-				<li>2025-03-31</li>
-			</ul>
+			<cr:choose>
+				<cr:when test="${empty mdList}">
+					<ul style="display: block;"><li class="nodata">등록된 게시물이 없습니다.</li></ul>
+				</cr:when>
+				<cr:otherwise>
+					<cr:forEach var="mdata" items="${mdList}" varStatus="idx">
+						<ul class="data_view">
+							<li>${total - start - idx.index}</li>
+							<li style="text-align: left; cursor: pointer;" onclick="location.href='./md_board_view.do?midx=${mdata.midx}'">${mdata.md_title}</li>
+							<li>${mdata.md_writer}</li>
+							<li>${mdata.md_view}</li>
+							<li>${mdata.md_date}</li>
+						</ul>
+					</cr:forEach>
+				</cr:otherwise>
+			</cr:choose>
 		</div>
+		
+		<!-- 페이징 -->
 		<div class="info_pageing">
 			<ol>
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
+				<cr:forEach var="p" begin="1" end="${total_page}">
+					<cr:url var="purl" value="./md_board.do">
+						<cr:param name="page" value="${p}"/>
+						<cr:param name="search" value="${search}"/>
+					</cr:url>
+					<li onclick="location.href='${purl}'" style="cursor: pointer; ${p == page ? 'font-weight: bold; color: #1d1d1d;' : ''}">${p}</li>
+				</cr:forEach>
 			</ol>
 		</div>
-		<div class="info_search">
-			<input type="text" class="search_text" placeholder="검색어를 입력하세요">
-			<input type="button" value="검색" class="search_btn">
-		</div>
+		
+		<!-- 검색 -->
+		<form id="sfrm" method="get" action="./md_board.do">
+			<div class="info_search">
+				<input type="text" name="search" class="search_text" placeholder="검색어를 입력하세요" value="${search}">
+				<input type="submit" value="검색" class="search_btn">
+				<cr:if test="${not empty sessionScope.memail}">
+					<input type="button" value="글쓰기" class="search_btn" onclick="location.href='./md_board_write.do'">
+				</cr:if>
+			</div>
+		</form>
 	</section>
 	<!-- 게시판 리스트 -->
 </main>

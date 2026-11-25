@@ -33,4 +33,18 @@ public class md_choice_DAO implements md_choice_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public List<md_choice_DTO> board_list() {	// 게시판 리스트 출력
+		List<md_choice_DTO> result = null;
+		
+		try {
+			result = this.st.selectList("board_list");
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

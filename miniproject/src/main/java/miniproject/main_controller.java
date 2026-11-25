@@ -623,4 +623,14 @@ public class main_controller {
 		
 		return null;
 	}
+	
+	// 추천분양 게시판 리스트 출력
+	@GetMapping("/realty/md_board.do")
+	public String md_board(Model m) {
+		List<md_choice_DTO> mdList = this.md_dao.board_list();
+		m.addAttribute("mdList", mdList);
+		m.addAttribute("total", mdList.size());	// NO 번호 계산용
+		
+		return null;
+	}
 }

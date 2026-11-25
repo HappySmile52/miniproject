@@ -11,4 +11,6 @@ public interface md_choice_mapper {
 	List<md_choice_DTO> mdchoice_select();	// 리스트 출력
 	
 	public int mdchoice_insert(md_choice_DTO dto);	// 게시판 글쓰기
+	
+	public List<md_choice_DTO> board_list();	// 게시판 리스트 출력
 }

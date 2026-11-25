@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Repository("md_choice_DTO")
 public class md_choice_DTO {
-	int midx;
+	int midx, md_view;
 	String md_title, md_details, md_imgs, md_add;
 	
 	String md_writer, md_content, md_date;

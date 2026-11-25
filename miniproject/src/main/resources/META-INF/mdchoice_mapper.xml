@@ -15,4 +15,12 @@ insert into md_choice (midx,md_title,md_details,md_imgs,md_writer,md_content,md_
 values ('0',#{md_title},#{md_details},#{md_imgs},#{md_writer},#{md_content},now())
 </insert>
 
+<!-- mdchoice 게시판 리스트 출력 -->
+<select id="board_list" resultType="mdchoicedto">
+select midx, replace(md_title, '&lt;br&gt;', ' ') as md_title, md_writer, md_view,
+date_format(md_date, '%Y-%m-%d') as md_date
+from md_choice
+order by midx desc
+</select>
+
 </mapper>
