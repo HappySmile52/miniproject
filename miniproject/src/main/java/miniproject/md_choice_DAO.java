@@ -62,4 +62,18 @@ public class md_choice_DAO implements md_choice_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public md_choice_DTO board_view(int midx) {	// 게시판 상세보기
+		md_choice_DTO result = null;
+		
+		try {
+			result = this.st.selectOne("board_view", midx);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }

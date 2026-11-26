@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -658,5 +657,30 @@ public class main_controller {
 		m.addAttribute("search", search);	// 검색창 + 페이징 링크에 유지
 		
 		return null;
+	}
+	
+	// 추천분양 게시판 상세보기
+	@GetMapping("/realty/md_board_view.do")
+	public String md_board_view(@RequestParam(name = "midx", defaultValue = "0") int midx,
+			Model m, ServletResponse res) {
+		res.setContentType("text/html;charset=utf-8");
+		
+		md_choice_DTO mdata = this.md_dao.board_view(midx);
+		
+		if(mdata == null) {	// 없는 게시물
+			try {
+				this.pw = res.getWriter();
+				this.pw.write("<script>alert('존재하지 않는 게시물입니다.'); location.href='./md_board.do';</script>");
+			}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			return null;
+		}
+		
+		m.addAttribute("mdata", mdata);
+		
+		return "realty/md_board_view";
 	}
 }

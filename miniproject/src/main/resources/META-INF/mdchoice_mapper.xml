@@ -31,4 +31,12 @@ order by midx desc
 limit #{start}, #{size}
 </select>
 
+<!-- mdchoice 게시판 상세보기 -->
+<select id="board_view" resultType="mdchoicedto" parameterType="int">
+select midx, replace(md_title, '&lt;br&gt;', ' ') as md_title, md_details, md_writer, md_content, md_view,
+date_format(md_date, '%Y-%m-%d') as md_date
+from md_choice
+where midx=#{midx}
+</select>
+
 </mapper>
