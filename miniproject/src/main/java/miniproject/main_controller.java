@@ -2,7 +2,9 @@ package miniproject;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletResponse;
@@ -626,10 +628,29 @@ public class main_controller {
 	
 	// 추천분양 게시판 리스트 출력
 	@GetMapping("/realty/md_board.do")
-	public String md_board(Model m) {
-		List<md_choice_DTO> mdList = this.md_dao.board_list();
+	public String md_board(@RequestParam(name = "page", defaultValue = "1") int page, Model m) {
+		int size = 10;	// 페이지당 게시물 수
+		
+		// 전체 글 수 -> 전체 페이지 수
+		int total = this.md_dao.board_count();
+		int total_page = (int)Math.ceil((double)total / size);
+		
+		// 잘못된 페이지 번호 보정
+		if(page < 1) page = 1;
+		if(total_page > 0 && page > total_page) page = total_page;
+		
+		int start = (page - 1) * size;	// limit 시작 위치
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("size", size);
+		List<md_choice_DTO> mdList = this.md_dao.board_list(map);
+		
 		m.addAttribute("mdList", mdList);
-		m.addAttribute("total", mdList.size());	// NO 번호 계산용
+		m.addAttribute("total", total);
+		m.addAttribute("start", start);
+		m.addAttribute("page", page);
+		m.addAttribute("total_page", total_page);
 		
 		return null;
 	}

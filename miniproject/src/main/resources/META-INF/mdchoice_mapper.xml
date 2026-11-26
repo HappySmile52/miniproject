@@ -15,12 +15,18 @@ insert into md_choice (midx,md_title,md_details,md_imgs,md_writer,md_content,md_
 values ('0',#{md_title},#{md_details},#{md_imgs},#{md_writer},#{md_content},now())
 </insert>
 
-<!-- mdchoice 게시판 리스트 출력 -->
-<select id="board_list" resultType="mdchoicedto">
+<!-- mdchoice 게시판 전체 글 수 -->
+<select id="board_count" resultType="int">
+select count(*) from md_choice
+</select>
+
+<!-- mdchoice 게시판 리스트 출력 (페이징 포함) -->
+<select id="board_list" resultType="mdchoicedto" parameterType="map">
 select midx, replace(md_title, '&lt;br&gt;', ' ') as md_title, md_writer, md_view,
 date_format(md_date, '%Y-%m-%d') as md_date
 from md_choice
 order by midx desc
+limit #{start}, #{size}
 </select>
 
 </mapper>

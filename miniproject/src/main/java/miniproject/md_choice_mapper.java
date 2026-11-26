@@ -1,6 +1,7 @@
 package miniproject;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,5 +13,7 @@ public interface md_choice_mapper {
 	
 	public int mdchoice_insert(md_choice_DTO dto);	// 게시판 글쓰기
 	
-	public List<md_choice_DTO> board_list();	// 게시판 리스트 출력
+	public int board_count();	// 게시판 전체 글 수
+	
+	public List<md_choice_DTO> board_list(Map<String, Object> map);	// 게시판 리스트 출력 (페이징 포함)
 }
