@@ -628,11 +628,14 @@ public class main_controller {
 	
 	// 추천분양 게시판 리스트 출력
 	@GetMapping("/realty/md_board.do")
-	public String md_board(@RequestParam(name = "page", defaultValue = "1") int page, Model m) {
+	public String md_board(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "search", defaultValue = "") String search,
+			Model m) {
 		int size = 10;	// 페이지당 게시물 수
+		search = search.trim();	// 앞뒤 공백 제거
 		
-		// 전체 글 수 -> 전체 페이지 수
-		int total = this.md_dao.board_count();
+		// 전체 글 수 (검색 포함) -> 전체 페이지 수
+		int total = this.md_dao.board_count(search);
 		int total_page = (int)Math.ceil((double)total / size);
 		
 		// 잘못된 페이지 번호 보정
@@ -642,6 +645,7 @@ public class main_controller {
 		int start = (page - 1) * size;	// limit 시작 위치
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
 		map.put("start", start);
 		map.put("size", size);
 		List<md_choice_DTO> mdList = this.md_dao.board_list(map);
@@ -651,6 +655,7 @@ public class main_controller {
 		m.addAttribute("start", start);
 		m.addAttribute("page", page);
 		m.addAttribute("total_page", total_page);
+		m.addAttribute("search", search);	// 검색창 + 페이징 링크에 유지
 		
 		return null;
 	}
