@@ -11,3 +11,13 @@ function logincheck(){
 		frm.submit();
 	}
 }
+
+// 비밀번호 보기 / 숨기기
+function pw_toggle(){
+	if(frm.lpass.type == "password"){
+		frm.lpass.type = "text";
+	}
+	else{
+		frm.lpass.type = "password";
+	}
+}
