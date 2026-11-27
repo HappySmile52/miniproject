@@ -38,6 +38,13 @@
 .login_pg > div > input[type="password"] {
 	margin: 10px 0 20px;
 }
+
+/* 로그인 입력 칸 안쪽 여백 */
+.login_pg > div > input[type="text"],
+.login_pg > div > input[type="password"] {
+	padding-left: 15px;
+	box-sizing: border-box;
+}
 .login_pg > div > input[type="button"] {
 	background: #ff6600;
 	color: #ffffff;
@@ -52,9 +59,6 @@
 	border: 0;
 }
 
-.login_pg > div > input::placeholder {
-	padding-left: 10px;
-}
 .login_pg > div > span {
 	position: relative;
 	color: #999999;
