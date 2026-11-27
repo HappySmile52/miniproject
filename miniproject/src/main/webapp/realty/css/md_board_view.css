@@ -88,3 +88,27 @@
 	box-sizing: border-box;
 	text-indent: 5px;
 }
+
+/* 상세보기 전용 : 내용 길이에 맞춰 높이 자동 조절 */
+.board_view .info_board > ul {
+	display: flex;
+	flex-wrap: wrap;
+	height: auto;
+}
+.board_view .info_board > ul > li.litext {
+	height: auto !important;
+}
+.board_view .textarea {
+	height: auto;
+	min-height: 150px;
+	line-height: 1.8;
+	padding: 12px 5px;
+	box-sizing: border-box;
+}
+.board_view .textarea img {
+	max-width: 100%;
+	height: auto;
+}
+.board_view .board_btn {
+	margin-top: 20px;
+}

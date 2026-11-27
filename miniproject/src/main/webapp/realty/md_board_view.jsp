@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
 	<title>추천분양 정보 게시판</title>
 	<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-	<link rel="stylesheet" type="text/css" href="./css/md_board_view.css?v=5">
+	<link rel="stylesheet" type="text/css" href="./css/md_board_view.css?v=6">
 	<style>
 	.box {
 		width: 800px;
@@ -26,7 +26,7 @@
 <!-- 상단 -->
 <main>
 	<!-- 게시판 상세페이지 -->
-	<section class="sub">
+	<section class="sub board_view">
 		<p>추천분양 정보 게시판</p>
 		<div class="boards">이번주 신규 매물정보를 한눈에 확인하실 수 있습니다.</div>
 		<div class="info_board">
