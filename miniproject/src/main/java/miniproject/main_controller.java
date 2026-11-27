@@ -665,6 +665,7 @@ public class main_controller {
 			Model m, ServletResponse res) {
 		res.setContentType("text/html;charset=utf-8");
 		
+		this.md_dao.board_view_up(midx);	// 조회수 +1
 		md_choice_DTO mdata = this.md_dao.board_view(midx);
 		
 		if(mdata == null) {	// 없는 게시물

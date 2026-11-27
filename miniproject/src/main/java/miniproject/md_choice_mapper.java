@@ -18,4 +18,6 @@ public interface md_choice_mapper {
 	public List<md_choice_DTO> board_list(Map<String, Object> map);	// 게시판 리스트 출력 (검색 + 페이징)
 	
 	public md_choice_DTO board_view(int midx);	// 게시판 상세보기
+	
+	public int board_view_up(int midx);	// 게시판 조회수 +1
 }

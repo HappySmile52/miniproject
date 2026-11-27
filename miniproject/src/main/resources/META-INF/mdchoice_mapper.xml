@@ -39,4 +39,9 @@ from md_choice
 where midx=#{midx}
 </select>
 
+<!-- mdchoice 게시판 조회수 +1 -->
+<update id="board_view_up" parameterType="int">
+update md_choice set md_view = md_view + 1 where midx=#{midx}
+</update>
+
 </mapper>

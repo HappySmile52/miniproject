@@ -76,4 +76,18 @@ public class md_choice_DAO implements md_choice_mapper {
 		
 		return result;
 	}
+	
+	@Override
+	public int board_view_up(int midx) {	// 게시판 조회수 +1
+		int result = 0;
+		
+		try {
+			result = this.st.update("board_view_up", midx);
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return result;
+	}
 }
