@@ -26,7 +26,7 @@
 <!-- 상단 -->
 <main>
 <!-- 로그인 -->
-<form id="frm" method="post" action="./loginok.do">
+<form id="frm" method="post" action="./loginok.do" onsubmit="return logincheck()">
 	<aside class="login_pg">	
 		<p>이메일로 시작하기</p>
 		<div><input type="text" name="lemail" placeholder="이메일 주소"></div>
@@ -34,7 +34,7 @@
 			<input type="password" name="lpass" placeholder="비밀번호">
 			<img src="./ico/password.svg" class="pw_eye" title="비밀번호 보기" onclick="pw_toggle()">
 		</div>
-		<div><input type="button" value="로그인" onclick="logincheck()"></div>
+		<div><input type="submit" value="로그인"></div>
 		<div><input type="button" value="카카오로그인" class="kakao_btn"></div>
 		<div>
 			<span><label onclick="location.href='./member_join.do'">회원가입</label></span>

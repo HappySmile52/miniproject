@@ -1,15 +1,18 @@
 function logincheck(){
-	if(frm.lemail.value == ""){
+	if(frm.lemail.value.trim() == ""){
 		alert("이메일 주소를 입력하세요.");
 		frm.lemail.focus();
+		
+		return false;	// 전송 중단
 	}
-	else if(frm.lpass.value == ""){
+	else if(frm.lpass.value.trim() == ""){
 		alert("비밀번호를 입력하세요.");
 		frm.lpass.focus();
+		
+		return false;	// 전송 중단
 	}
-	else{
-		frm.submit();
-	}
+	
+	return true;	// 전송
 }
 
 // 비밀번호 보기 / 숨기기

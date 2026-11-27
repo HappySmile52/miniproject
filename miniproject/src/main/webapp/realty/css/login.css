@@ -42,7 +42,8 @@
 	padding-left: 15px;
 	box-sizing: border-box;
 }
-.login_pg > div > input[type="button"] {
+.login_pg > div > input[type="button"],
+.login_pg > div > input[type="submit"] {
 	background: #ff6600;
 	color: #ffffff;
 	text-align: center;
